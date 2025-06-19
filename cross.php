@@ -37,7 +37,7 @@ function generateCrosswordWithBacktracking($words, $gridSize) {
     $wordData = []; // Для зберігання інформації про кожне слово в кросворді
 
     // Функція для спроби розміщення слів з поверненням
-    function placeWordWithBacktracking($words, $index, &$grid, &$wordData) {
+    function placeWordWithBacktracking($words, $index, &$grid, &$wordData, $gridSize) {
         if ($index === count($words)) {
             return true; // Якщо всі слова розміщені
         }
@@ -59,7 +59,7 @@ function generateCrosswordWithBacktracking($words, $gridSize) {
                         'direction' => 'across'
                     ];
 
-                    if (placeWordWithBacktracking($words, $index + 1, $grid, $wordData)) {
+                    if (placeWordWithBacktracking($words, $index + 1, $grid, $wordData, $gridSize)) {
                         return true; // Якщо слово вдалося розмістити, пробуємо наступне
                     }
 
@@ -79,7 +79,7 @@ function generateCrosswordWithBacktracking($words, $gridSize) {
                         'direction' => 'down'
                     ];
 
-                    if (placeWordWithBacktracking($words, $index + 1, $grid, $wordData)) {
+                    if (placeWordWithBacktracking($words, $index + 1, $grid, $wordData, $gridSize)) {
                         return true; // Якщо слово вдалося розмістити, пробуємо наступне
                     }
 
@@ -94,7 +94,7 @@ function generateCrosswordWithBacktracking($words, $gridSize) {
     }
 
     // Починаємо розміщення слів з першого
-    placeWordWithBacktracking($words, 0, $grid, $wordData);
+    placeWordWithBacktracking($words, 0, $grid, $wordData, $gridSize);
 
     return [
         'size' => $gridSize,
